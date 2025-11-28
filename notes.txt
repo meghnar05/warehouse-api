@@ -1,0 +1,40 @@
+defining an function can be either: 
+1. async def func()
+    which basically means that you're going to use an external library that tells you to call them
+    with await
+2. def func()
+    which can be used in pretty much all other cases. ** Safe to use this when you don't know!
+
+** The value of the path paramter (enclosed in {}) will be passed to your function as the argument
+
+Example of item_id: 
+    - the value your function received (and returned) is 3 (for ex) as a Python int, not a string "3"
+    - with type declaration, FastAPI gives you automatic request parsing
+    - it also gives data validation because it throws errors when types are mismatched and error messages state the exact point where the validation didn't pass
+
+Path operations are evaluated in order so declare "hardcoded" versions before variable paths
+
+If you have a path operation that receives a path parameter, but you want the possible valid path parameter values to be predefined, you can use a standard Python Enum
+
+Adding :path to the path parameter tells that you can append that path to any path
+
+Query Parameters: when you declare other function parameters that are not part of the path parameters, they are automatically interpreted as "query" parameters
+    - the query is the set of key-value pairs that go after the ? in a URL, separated by & characters
+    - as they are part of the URL they are naturally strings but when you declare them with Python types they are converted to that type and validated against it
+    - you can declare optional query parameters by setting their defualt value to None
+
+Request body: data sent by the client to your API
+Response body: data your API sends to the client
+
+Pydantic: Python library for data validation and settings management that uses Python type hints to:
+    - validate input data
+    - convert (coerce) data into the right types
+    - provide clear, helpful error messages
+    - define data models (like schema)
+    - integrate naturally with FastAPI
+
+**item.model_dump()
+    - the ** operator unpacks a dictionary into key/value pairs
+    - **{"name": "Laptop", "price": 1200} == "name": "Laptop", "price": 1200
+
+If you declare both a return type and a response_model, the response_model will take priority and be used by FastAPI
